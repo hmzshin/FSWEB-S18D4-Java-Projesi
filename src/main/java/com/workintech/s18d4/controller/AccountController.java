@@ -13,6 +13,7 @@ import com.workintech.s18d4.service.CustomerService;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,7 +53,7 @@ public class AccountController {
         Customer customer = customerService.findById(customerId);
         Account accountToUpdate = null;
         for (Account a : customer.getAccounts()) {
-            if (account.getId() == a.getId()) {
+            if (Objects.equals(account.getId(), a.getId())) {
                 accountToUpdate = a;
             }
         }
@@ -61,7 +62,7 @@ public class AccountController {
             throw new RuntimeException("Account is not found");
         }
 
-        Integer indexOfAccountToUpdate = customer.getAccounts().indexOf(accountToUpdate);
+        int indexOfAccountToUpdate = customer.getAccounts().indexOf(accountToUpdate);
         customer.getAccounts().set(indexOfAccountToUpdate, account);
         account.setCustomer(customer);
 

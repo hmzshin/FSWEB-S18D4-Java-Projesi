@@ -20,9 +20,15 @@ public class AddressServiceImpl implements AddressService {
         return addressRepository.findAll();
     }
 
-    @SuppressWarnings("null")
     @Override
     public Address save(Address address) {
+        return addressRepository.save(address);
+    }
+
+
+    @Override
+    public Address update(Address address, Long id) {
+        address.setId(id);
         return addressRepository.save(address);
     }
 
